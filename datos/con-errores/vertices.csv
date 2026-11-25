@@ -1,0 +1,6 @@
+id,name,x,y,type,priority
+A,Edificio A,0,0,edificio,alta
+B,Biblioteca,cuatro,0,edificio,media
+C,Cruce Central,2,3,cruce,alta
+A,Edificio repetido,5,5,edificio,baja
+D,Subestacion,7,3,critico,alta

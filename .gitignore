@@ -1,0 +1,20 @@
+# Carpetas de compilacion
+build/
+out/
+cmake-build-*/
+
+# Binarios y objetos
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+
+# Archivos de IDE
+.vs/
+*.user
+CMakeUserPresets.json
+.vscode/*
+!.vscode/settings.json
+.idea/

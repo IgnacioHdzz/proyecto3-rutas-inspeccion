@@ -1,0 +1,9 @@
+u,v,length,speed_limit,oneway,can_close
+A,B,400,30,false,true
+A,C,360,25,false,true
+B,C,360,25,false,false
+C,D,500,40,false,false
+D,E,420,30,false,true
+E,F,600,20,false,true
+D,F,420,30,true,true
+F,G,400,15,false,false
