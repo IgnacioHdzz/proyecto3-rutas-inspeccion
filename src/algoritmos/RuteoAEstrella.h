@@ -8,7 +8,6 @@
 // euclidiana por un factor de escala, el menor length / distanciaEuclidiana
 // entre todas las aristas. Si el criterio es tiempo se divide ademas entre
 // la velocidad maxima de la red.
-// Responsable Persona 1
 class RuteoAEstrella : public EstrategiaRuteo {
 public:
     ResultadoRuta calcularRuta(const Grafo& pGrafo, int pOrigen, int pDestino,

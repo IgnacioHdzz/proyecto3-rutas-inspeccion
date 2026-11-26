@@ -8,12 +8,10 @@
 
 namespace {
 
-// Columnas obligatorias de cada archivo, en el orden en que se usan abajo
 const std::vector<std::string> COLUMNAS_VERTICES = {"id", "name", "x", "y", "type", "priority"};
 const std::vector<std::string> COLUMNAS_ARISTAS = {"u", "v", "length", "speed_limit",
                                                     "oneway", "can_close"};
 
-// "datos/pequeno/aristas.csv" -> "aristas.csv", para que los mensajes sean cortos
 std::string nombreArchivo(const std::string& pRuta) {
     size_t barra = pRuta.find_last_of("/\\");
     return barra == std::string::npos ? pRuta : pRuta.substr(barra + 1);
@@ -25,15 +23,14 @@ std::string enMinusculas(std::string pTexto) {
     return pTexto;
 }
 
-}  // namespace
+}
 
 ReporteValidacion CargadorCSV::cargar(const std::string& pRutaVertices,
                                       const std::string& pRutaAristas, Grafo& pGrafo) const {
     ReporteValidacion reporte;
     Grafo temporal;
 
-    // Las aristas se revisan aunque los vertices tengan errores,
-    // asi el usuario ve todos los problemas en una sola pasada (D8)
+    // Se revisan los dos archivos para reportar todos los errores juntos
     cargarVertices(pRutaVertices, temporal, reporte);
     cargarAristas(pRutaAristas, temporal, reporte);
 
@@ -71,11 +68,10 @@ void CargadorCSV::cargarVertices(const std::string& pRuta, Grafo& pGrafo,
     while (std::getline(entrada, linea)) {
         numeroLinea++;
         if (recortar(linea).empty()) {
-            continue;  // las lineas en blanco se ignoran
+            continue;
         }
         std::vector<std::string> campos = separar(linea, ',');
 
-        // Saca el campo de la columna i, o reporta si viene vacio o no existe
         auto campo = [&](size_t pColumna) -> std::string {
             size_t posicion = static_cast<size_t>(posiciones[pColumna]);
             std::string valor = posicion < campos.size() ? recortar(campos[posicion]) : "";
@@ -109,9 +105,7 @@ void CargadorCSV::cargarVertices(const std::string& pRuta, Grafo& pGrafo,
             pReporte.agregarError(archivo, numeroLinea, "el id " + id + " esta repetido");
             continue;
         }
-        // Aunque la linea tenga otros errores, el vertice se agrega igual.
-        // Asi las aristas que lo usan no reportan un falso "no existe".
-        // No hay riesgo porque con cualquier error el grafo temporal se descarta
+        // Se agrega aunque la linea tenga errores para que sus aristas no den "no existe"
         pGrafo.agregarVertice(Vertice(id, nombre, x, y, tipo, prioridad));
     }
 }
@@ -235,7 +229,7 @@ bool CargadorCSV::leerEncabezado(const std::string& pLinea,
                                  const std::vector<std::string>& pColumnasRequeridas,
                                  std::vector<int>& pPosiciones) const {
     std::vector<std::string> columnas = separar(pLinea, ',');
-    // Excel a veces guarda el CSV con una marca invisible (BOM) al inicio
+    // Quita el BOM que deja Excel
     if (!columnas.empty() && columnas[0].rfind("\xEF\xBB\xBF", 0) == 0) {
         columnas[0] = columnas[0].substr(3);
     }
@@ -253,7 +247,7 @@ bool CargadorCSV::leerEncabezado(const std::string& pLinea,
 }
 
 std::vector<std::string> CargadorCSV::separar(const std::string& pLinea, char pSeparador) const {
-    // Respeta comillas, para que un nombre como "Lab, piso 2" no se parta en dos
+    // Respeta las comillas
     std::vector<std::string> campos;
     std::string actual;
     bool entreComillas = false;
@@ -272,7 +266,6 @@ std::vector<std::string> CargadorCSV::separar(const std::string& pLinea, char pS
 }
 
 std::string CargadorCSV::recortar(const std::string& pTexto) const {
-    // Quita espacios y el \r que dejan los archivos guardados en Windows
     const char* espacios = " \t\r\n";
     size_t inicio = pTexto.find_first_not_of(espacios);
     if (inicio == std::string::npos) {
@@ -286,14 +279,14 @@ bool CargadorCSV::convertirDouble(const std::string& pTexto, double& pResultado)
     try {
         size_t usados = 0;
         double valor = std::stod(pTexto, &usados);
-        // "12abc" no es valido: stod tiene que haber usado todo el texto
+        // stod tiene que usar todo el texto, si no "12abc" pasaria como 12
         if (usados != pTexto.size() || !std::isfinite(valor)) {
             return false;
         }
         pResultado = valor;
         return true;
     } catch (...) {
-        return false;  // "cuatro", texto vacio o numero fuera de rango
+        return false;
     }
 }
 

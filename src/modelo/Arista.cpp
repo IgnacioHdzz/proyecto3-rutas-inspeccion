@@ -1,7 +1,6 @@
 #include "modelo/Arista.h"
 
 double Arista::getTiempo() const {
-    // El CargadorCSV garantiza velocidad > 0, asi que no hay division entre cero
     return longitud / velocidad;
 }
 
@@ -19,5 +18,5 @@ int Arista::getOtroExtremo(int pVertice) const {
     if (pVertice == destino) {
         return origen;
     }
-    return -1;  // pVertice no es extremo de esta arista
+    return -1;
 }

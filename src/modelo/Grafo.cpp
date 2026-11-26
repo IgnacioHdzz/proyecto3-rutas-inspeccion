@@ -3,7 +3,6 @@
 #include <sstream>
 
 int Grafo::agregarVertice(const Vertice& pVertice) {
-    // Un id repetido no se agrega. El CargadorCSV ya lo reporta como error
     if (indicePorId.count(pVertice.getId()) > 0) {
         return -1;
     }
@@ -24,8 +23,7 @@ int Grafo::agregarArista(const Arista& pArista) {
     int indice = static_cast<int>(aristas.size());
     aristas.push_back(pArista);
 
-    // Se registra en los dos extremos aunque sea de un sentido.
-    // getAristasSalientes es la que decide si se puede salir por ella
+    // Se registra en ambos extremos aunque sea de un sentido
     adyacencia[origen].push_back(indice);
     if (destino != origen) {
         adyacencia[destino].push_back(indice);
@@ -48,7 +46,7 @@ std::vector<int> Grafo::getAristasSalientes(int pVertice) const {
         if (!arista.estaHabilitada()) {
             continue;
         }
-        // Una arista de un sentido solo se puede tomar desde su origen
+        // Si es de un sentido solo sale desde el origen
         if (arista.esUnSentido() && arista.getOrigen() != pVertice) {
             continue;
         }
@@ -114,8 +112,6 @@ double Grafo::getCostoTotal(CriterioPeso pCriterio) const {
 }
 
 std::string Grafo::toTexto() const {
-    // Formato: "A (Edificio A): B [long 400, vel 30], C [long 360, vel 25]"
-    // Las de un sentido indican hacia donde van y las cerradas se marcan
     std::ostringstream texto;
     texto << "Grafo con " << getCantidadVertices() << " vertices y "
           << getCantidadAristas() << " aristas\n";

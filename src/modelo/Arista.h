@@ -6,7 +6,6 @@ enum class CriterioPeso { TIEMPO, DISTANCIA };
 
 // Conexion entre dos vertices (calle, tuberia, cableado...).
 // Guarda los indices de sus extremos dentro del Grafo, no los ids de texto.
-// Responsable Persona 1
 class Arista {
 public:
     Arista(int pOrigen, int pDestino, double pLongitud, double pVelocidad,

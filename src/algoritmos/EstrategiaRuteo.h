@@ -10,7 +10,6 @@
 // Interfaz del patron Strategy para el ruteo (D2).
 // Dijkstra y A* la implementan y el resto del programa solo conoce esta clase,
 // por eso la ruta alternativa y los cierres funcionan con cualquiera de los dos.
-// Responsable Persona 1
 class EstrategiaRuteo {
 public:
     virtual ~EstrategiaRuteo() = default;

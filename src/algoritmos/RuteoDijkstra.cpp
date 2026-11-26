@@ -19,7 +19,7 @@ ResultadoRuta RuteoDijkstra::calcularRuta(const Grafo& pGrafo, int pOrigen, int 
     std::vector<int> aristaPrevia(cantidad, -1);
     std::vector<bool> visitado(cantidad, false);
 
-    // Cola de prioridad de minimos: (distancia acumulada, vertice)
+    // Cola de minimos de (distancia, vertice)
     using Par = std::pair<double, int>;
     std::priority_queue<Par, std::vector<Par>, std::greater<Par>> cola;
 
@@ -31,8 +31,7 @@ ResultadoRuta RuteoDijkstra::calcularRuta(const Grafo& pGrafo, int pOrigen, int 
         int actual = cola.top().second;
         cola.pop();
 
-        // Un vertice puede quedar varias veces en la cola con distancias viejas.
-        // Solo cuenta la primera vez que sale, que es la de menor distancia
+        // Entradas viejas del mismo vertice se ignoran
         if (visitado[actual]) {
             continue;
         }
@@ -40,10 +39,9 @@ ResultadoRuta RuteoDijkstra::calcularRuta(const Grafo& pGrafo, int pOrigen, int 
         nodosExplorados++;
 
         if (actual == pDestino) {
-            break;  // su distancia ya es definitiva, no hace falta seguir
+            break;
         }
 
-        // getAristasSalientes ya filtra las cerradas y respeta oneway
         for (int indiceArista : pGrafo.getAristasSalientes(actual)) {
             const Arista& arista = pGrafo.getArista(indiceArista);
             int vecino = arista.getOtroExtremo(actual);

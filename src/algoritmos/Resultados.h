@@ -6,7 +6,6 @@
 
 // Objetos que devuelven los algoritmos. Solo transportan datos entre
 // la logica y la interfaz, y todo se guarda por indice.
-// Compartido. Si alguno necesita un campo nuevo lo agrega y avisa.
 
 struct ResultadoRuta {
     bool encontrada = false;

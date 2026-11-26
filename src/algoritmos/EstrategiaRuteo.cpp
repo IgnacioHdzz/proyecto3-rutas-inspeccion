@@ -8,13 +8,11 @@ ResultadoRuta EstrategiaRuteo::reconstruirRuta(const Grafo& pGrafo, int pOrigen,
     ResultadoRuta resultado;
     resultado.algoritmo = getNombre();
 
-    // Si al destino no se llego por ninguna arista, no hay ruta
-    // (salvo que origen y destino sean el mismo vertice)
     if (pOrigen != pDestino && pAristaPrevia[pDestino] < 0) {
         return resultado;
     }
 
-    // Se camina del destino hacia atras usando la arista con la que se llego a cada vertice
+    // Del destino hacia atras con la arista previa de cada vertice
     int actual = pDestino;
     resultado.vertices.push_back(actual);
     while (actual != pOrigen) {
@@ -28,7 +26,6 @@ ResultadoRuta EstrategiaRuteo::reconstruirRuta(const Grafo& pGrafo, int pOrigen,
         resultado.vertices.push_back(actual);
     }
 
-    // Quedo de destino a origen, se invierte para que vaya de origen a destino
     std::reverse(resultado.vertices.begin(), resultado.vertices.end());
     std::reverse(resultado.aristas.begin(), resultado.aristas.end());
     resultado.encontrada = true;

@@ -4,7 +4,6 @@
 #include <string>
 
 // Punto de la red (edificio, subestacion, cruce...). Solo guarda datos.
-// Compartido, ya viene completo.
 class Vertice {
 public:
     Vertice(const std::string& pId, const std::string& pNombre, double pX, double pY,

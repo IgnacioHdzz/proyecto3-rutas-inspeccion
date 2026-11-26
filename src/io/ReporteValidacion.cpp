@@ -4,7 +4,7 @@
 
 void ReporteValidacion::agregarError(const std::string& pArchivo, int pLinea,
                                      const std::string& pMensaje) {
-    // La linea 0 se usa para errores del archivo completo (por ejemplo, no se pudo abrir)
+    // Linea 0: error del archivo completo
     if (pLinea > 0) {
         errores.push_back(pArchivo + " linea " + std::to_string(pLinea) + ", " + pMensaje);
     } else {
