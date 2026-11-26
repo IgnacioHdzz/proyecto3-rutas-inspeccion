@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QSplitter>
 
+#include "gui/PanelConectividad.h"
+
 
 VentanaPrincipal::VentanaPrincipal(QWidget* pPadre) : QMainWindow(pPadre) {
     setWindowTitle("Rutas de inspeccion y puntos criticos");
@@ -14,6 +16,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget* pPadre) : QMainWindow(pPadre) {
     construirLayout();
 
     // Cada panel se agrega aqui con agregarPanel cuando su parte este lista
+    agregarPanel(new PanelConectividad(sistema), "Conectividad");
 }
 
 void VentanaPrincipal::construirMenu() {
