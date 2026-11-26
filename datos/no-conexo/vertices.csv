@@ -1,0 +1,8 @@
+id,name,x,y,type,priority
+A,Edificio A,0,0,edificio,alta
+B,Biblioteca,4,0,edificio,media
+C,Cruce Norte,2,3,cruce,media
+D,Laboratorios,8,1,edificio,alta
+E,Soda,11,1,edificio,baja
+F,Residencias,9.5,4,edificio,media
+G,Tanque aislado,13,5,critico,alta
