@@ -12,7 +12,6 @@
 // Cada arista se guarda una sola vez y cada vertice conoce los indices
 // de las aristas que lo tocan, sin importar la direccion.
 // Aqui no van algoritmos, solo datos y consultas basicas.
-// Responsable Persona 1
 class Grafo {
 public:
     Grafo() = default;

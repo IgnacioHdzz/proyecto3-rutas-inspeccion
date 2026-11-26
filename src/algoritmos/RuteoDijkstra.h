@@ -4,7 +4,6 @@
 #include "algoritmos/EstrategiaRuteo.h"
 
 // Dijkstra de un origen a un destino con cola de prioridad.
-// Responsable Persona 1
 class RuteoDijkstra : public EstrategiaRuteo {
 public:
     ResultadoRuta calcularRuta(const Grafo& pGrafo, int pOrigen, int pDestino,

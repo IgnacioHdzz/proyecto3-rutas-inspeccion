@@ -11,7 +11,6 @@
 // Valida columnas obligatorias, campos vacios, numeros y booleanos mal escritos,
 // ids repetidos, aristas hacia vertices inexistentes y longitud o velocidad <= 0.
 // Si hay errores pGrafo no se toca y el reporte explica por que.
-// Responsable Persona 1
 class CargadorCSV {
 public:
     ReporteValidacion cargar(const std::string& pRutaVertices, const std::string& pRutaAristas,

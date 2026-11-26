@@ -11,7 +11,6 @@
 // Top-k de elementos criticos y texto de los reportes de la red
 // (recorridos, componentes, criticos, MST y desvios).
 // Solo trabaja con resultados ya calculados, no ejecuta algoritmos.
-// Responsable Persona 2
 class ReportesRed {
 public:
     // Puntos de articulacion ordenados por grado de mayor a menor. Pares (vertice, grado)
