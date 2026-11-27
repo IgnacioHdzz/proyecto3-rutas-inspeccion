@@ -7,6 +7,7 @@
 #include <QSplitter>
 
 #include "gui/PanelConectividad.h"
+#include "gui/PanelRuteo.h"
 
 
 VentanaPrincipal::VentanaPrincipal(QWidget* pPadre) : QMainWindow(pPadre) {
@@ -16,6 +17,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget* pPadre) : QMainWindow(pPadre) {
     construirLayout();
 
     // Cada panel se agrega aqui con agregarPanel cuando su parte este lista
+    agregarPanel(new PanelRuteo(sistema), "Ruteo");
     agregarPanel(new PanelConectividad(sistema), "Conectividad");
 }
 
